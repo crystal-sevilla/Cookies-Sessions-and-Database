@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         body {
             font-family: Helvetica, Arial, sans-serif;
-            background-color: #f0f2f5;
+            background-color: #e7e7e7;
             color: #1c1e21;
             line-height: 1.6;
             padding: 30px 15px;
@@ -75,14 +75,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             text-align: center;
         }
 
-        header h1 {
-            font-size: 1.85rem;
-            margin-bottom: 6px;
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2px;
+            text-align: center;
         }
 
-        header p {
+        #description {
             opacity: 0.9;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        #visit-count {
+            color: #3a3a3a;
+            font-size: 0.9rem;
+            font-weight: 10;
+            font-style: italic;
+            text-align: center;
         }
 
         .session-badge {
@@ -261,26 +271,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <h1>Welcome to the Classwall!</h1>
-    <p>Enter your discussions here!</p>
-
-        <h2>Discussion Board</h2>
-        <p>You have visited this page <?php echo $_SESSION['visits']; ?> times during this session.</p>
+    <p id = "description">Discover our Discussion Board and enter your discussions here!</p>
+        <p id = "visit-count">You have visited this page <?php echo $_SESSION['visits']; ?> times during this session.</p>
         <form action="index.php" method="POST">
             <section id = "name">
                 <?php if (!empty($submission_error)): ?>
                     <p style="color: red;"><?php echo htmlspecialchars($submission_error); ?></p>
                 <?php endif; ?>
                 <label for="author">Username:</label>
-                <input type="text" id="author" name="author" value="<?php echo htmlspecialchars($cookie_name); ?>" required><br><br>
+                <input type="text" id="author" name="author" value="<?php echo htmlspecialchars($cookie_name); ?>" required>
                 <input type="checkbox" id="remember_name" name="remember_name" value="1" <?php echo !empty($cookie_name) ? 'checked' : ''; ?>>
                 <label for="remember_name">Remember my username</label>
             </section>
             <section id = "forms">
                 <label for="message">Enter your Message:</label>
-                <textarea id="message" name="message" required></textarea><br><br>
+                <textarea id="message" name="message" required></textarea>
                 <button type="submit"> Post Message </button>
             </section>
-        </form>
+        </form><br>
 
         <section id = "search">
             <h3>Search Messages</h3>
@@ -290,7 +298,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php if (!empty($search)): ?>
                     <a href="index.php">Reset</a>
                 <?php endif; ?>
-            </form>
+            </form><br>
         </section>
 
         <section id = "messages">
